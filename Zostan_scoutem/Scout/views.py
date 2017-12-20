@@ -7,11 +7,13 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from .models import Club, Player, HAJ, BK
-from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.forms import UserCreationForm
 from .forms import PlayerSearchForm, ClubSearchForm, LoginForm, SignupForm
 
 
-class ClubsView(View):
+class ClubsView(PermissionRequiredMixin, View):
+
+    permission_required = "Scout.add_club"
 
     def get(self, request):
         form = ClubSearchForm()
@@ -19,14 +21,16 @@ class ClubsView(View):
         return render(request, "clubs.html", {"clubs": clubs, "form": form})
 
     def post(self, request):
-        form = ClubSearchForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            result = Club.objects.filter(name__icontains=name)
-        # else:
-        #     return render(request, "clubs.html", {"form": ClubSearchForm(), "msg": "Nie ma takiego klubu w bazie"})
-        return render(request, "clubs.html", {"form": form, "result": result})
-
+        if request.user.has_perm("add_club"):
+            form = ClubSearchForm(request.POST)
+            if form.is_valid():
+                name = form.cleaned_data['name']
+                result = Club.objects.filter(name__icontains=name)
+            # else:
+            #     return render(request, "clubs.html", {"form": ClubSearchForm(), "msg": "Nie ma takiego klubu w bazie"})
+            return render(request, "clubs.html", {"form": form, "result": result})
+        else:
+            return HttpResponseRedirect(reverse('login'))
 
 
 class ClubIdView(View):
