@@ -1,6 +1,7 @@
 from django import forms
 from .models import Club
-from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User, Group
 
 
 # class UserForm(ModelForm):
@@ -29,8 +30,11 @@ class LoginForm(forms.Form):
     password = forms.CharField(max_length=150, label="hasło", widget=forms.PasswordInput)
 
 
-class SignupForm(forms.Form):
+class SignupForm(UserCreationForm):
+    group = forms.ModelChoiceField(queryset=Group.objects.all(), required=True)
+    class Meta:
+        model = User
+        fields = ['username', 'password1', 'password2', 'group']
+        widgets = {'password': forms.PasswordInput}
 
-    username = forms.CharField(max_length=150, label="nazwa użytkownika")
-    email = forms.CharField(max_length=150, label="adres email")
-    password = forms.CharField(max_length=150, label="hasło", widget=forms.PasswordInput)
+

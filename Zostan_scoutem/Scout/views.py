@@ -116,42 +116,21 @@ class LogoutView(View):
         return HttpResponseRedirect('/login')
 
 
-# class SignupView2(View):
-#     def get(self, request):
-#         form = SignupForm()
-#         return render(request, "signup.html", {"form": form})
-#
-#     def post(self, request):
-#         form = SignupForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             username = form.cleaned_data["username"]
-#             password = form.cleaned_data["password"]
-#             email = form.cleaned_data["email"]
-#             auth = authenticate(username=username, password=password, email=email)
-#             if auth:
-#                 login(request, auth)
-#                 return HttpResponse("Zarejestrowano")
-#             else:
-#                 return HttpResponse("Błędne dane.")
-#         return render(request, "signup.html", {"form": form})
-
-
 class SignupView(View):
 
     def get(self, request):
-        form = UserCreationForm()
+        form = SignupForm()
         return render(request, "signup.html", {"form": form})
 
     def post(self, request):
-        form = UserCreationForm(request.POST)
+        form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
+            username = form.cleaned_data["username"]
+            raw_password = form.cleaned_data["password1"]
+            group = form.cleaned_data["group"]
+            user = authenticate(username=username, password=raw_password, group=group)
             login(request, user)
-            return HttpResponseRedirect('clubs')
-        else:
-            form = UserCreationForm()
+            return HttpResponseRedirect(reverse('list-users'))
         return render(request, 'signup.html', {'form': form})
+
