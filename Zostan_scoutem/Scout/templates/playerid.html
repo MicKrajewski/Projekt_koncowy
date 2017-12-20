@@ -1,0 +1,309 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1> {{ player.name }}</h1>
+
+<div>
+    <div class="viewdiv">
+        <fieldset class="viewfieldset" id="fs1">
+            <legend><h3>Informacje ogólne</h3></legend>
+            <table>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+                <tr>
+                    <td class="tdd1">Imię: </td>
+                    <td class="tdd2">{{ player.first_name }}</td>
+                </tr>
+                <tr>
+                    <td class="tdd1">Nazwisko: </td>
+                    <td class="tdd2">{{ player.last_name }}</td>
+                </tr>
+                <tr>
+                    <td class="tdd1">Pseudonim: </td>
+                    <td class="tdd2">{{ player.pseudo }}</td>
+                </tr>
+                <tr>
+                    <td class="tdd1">Narodowość: </td>
+                    <td class="tdd2">{{ player.nationality }}</td>
+                </tr>
+                <tr>
+                    <td class="tdd1">Wiek: </td>
+                    <td class="tdd2">{{ player.age }}</td>
+                </tr>
+                <tr>
+                    <td class="tdd1">Waga: </td>
+                    <td class="tdd2">{{ player.weight }}</td>
+                </tr>
+                <tr>
+                    <td class="tdd1">Wzrost: </td>
+                    <td class="tdd2">{{ player.height }}</td>
+                </tr>
+                <tr>
+                    <td class="tdd1">Wartość: </td>
+                    <td class="tdd2">{{ player.paid }}</td>
+                </tr><tr>
+                    <td class="tdd1">Preferowana noga: </td>
+                    <td class="tdd2">{{ player.get_leg_display }}</td>
+                </tr><tr>
+                    <td class="tdd1">Pozycje: </td>
+                    <td class="tdd2">{{ player.get_position_display }}</td>
+                </tr><tr>
+                    <td class="tdd1">Obecne umiejętności: </td>
+                    <td class="tdd2">{{ player.get_ca_display }}</td>
+                </tr><tr>
+                    <td class="tdd1">Potencjalne umiejętnośći: </td>
+                    <td class="tdd2">{{ player.get_pa_display }}</td>
+                </tr><tr>
+                    <td class="tdd1">Klub: </td>
+                    <td class="tdd2"><a href="/club/{{ player.clubs.id }}">{{ player.clubs.name }}</a></td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+
+    <div class="viewdiv">
+        <fieldset class="viewfieldset" id="fs2">
+            <legend><h3>Atrybuty techniczne</h3></legend>
+            <table>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
+                <tr>
+                  <td class="tdd1">Dośrodkowania: </td>
+                  <td class="tdd2">{{ player.dos }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Drybling:</td>
+                  <td class="tdd2">{{ player.dryb }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Gra głową:</td>
+                  <td class="tdd2">{{ player.glow }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Krycie: </td>
+                  <td class="tdd2">{{ player.kry }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Odbiór piłki: </td>
+                  <td class="tdd2">{{ player.odb }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Podania: </td>
+                  <td class="tdd2">{{ player.pod }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Przyjęcie: </td>
+                  <td class="tdd2">{{ player.przy }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Rzuty karne: </td>
+                  <td class="tdd2">{{ player.rzk }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Rzuty wolne: </td>
+                  <td class="tdd2">{{ player.rzw }}</td>
+                </tr><tr>
+                  <td class="tdd1">Rzuty rożne: </td>
+                  <td class="tdd2">{{ player.rzr }}</td>
+                </tr><tr>
+                  <td class="tdd1">Technika: </td>
+                  <td class="tdd2">{{ player.tech }}</td>
+                </tr><tr>
+                  <td class="tdd1">Wykańczanie akcji: </td>
+                  <td class="tdd2">{{ player.wyk }}</td>
+                </tr>
+              </table>
+        </fieldset>
+    </div >
+
+    <div class="viewdiv">
+        <fieldset class="viewfieldset" id="fs3">
+            <legend><h3>Atrybuty psychiczne</h3></legend>
+            <table>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
+                <tr>
+                  <td class="tdd1">Agresja: </td>
+                  <td class="tdd2">{{ player.agre }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Decyzje: </td>
+                  <td class="tdd2">{{ player.dec }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Determinacja: </td>
+                  <td class="tdd2">{{ player.det }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Koncentracja: </td>
+                  <td class="tdd2">{{ player.konc }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Opanowanie: </td>
+                  <td class="tdd2">{{ player.opa }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Pracowitość: </td>
+                  <td class="tdd2">{{ player.prac }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Przwidywanie: </td>
+                  <td class="tdd2">{{ player.prze }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Przywództwo: </td>
+                  <td class="tdd2">{{ player.przyw }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Waleczność: </td>
+                  <td class="tdd2">{{ player.wale }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Współpraca: </td>
+                  <td class="tdd2">{{ player.wsp }}</td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+
+    <div class="viewdiv">
+        <fieldset class="viewfieldset" id="fs5">
+            <legend><h3>Atrybuty fizyczne</h3></legend>
+            <table>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
+                <tr>
+                  <td class="tdd1">Przyspieszenie: </td>
+                  <td class="tdd2">{{ player.przys }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Równowaga: </td>
+                  <td class="tdd2">{{ player.row }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Siła: </td>
+                  <td class="tdd2">{{ player.sil }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Skoczność: </td>
+                  <td class="tdd2">{{ player.sko }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Sprawność: </td>
+                  <td class="tdd2">{{ player.spr }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Szybkość: </td>
+                  <td class="tdd2">{{ player.szybk }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Wytrzymałość: </td>
+                  <td class="tdd2">{{ player.wytrz }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Zwinność: </td>
+                  <td class="tdd2">{{ player.zwinn }}</td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+
+    <div class="viewdiv">
+        <fieldset class="viewfieldset" id="fs6">
+            <legend><h3>Atrybuty bramkarskie</h3></legend>
+            <table>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
+                <tr>
+                  <td class="tdd1">Chwytanie: </td>
+                  <td class="tdd2">{{ player.chwy }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Ekscentryczność: </td>
+                  <td class="tdd2">{{ player.eksc }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Gra na przedpolu: </td>
+                  <td class="tdd2">{{ player.gnp }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Sam na sam: </td>
+                  <td class="tdd2">{{ player.jnj }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Komunikacja: </td>
+                  <td class="tdd2">{{ player.komu }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Refleks: </td>
+                  <td class="tdd2">{{ player.refl }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Skłonność do piąstkowania: </td>
+                  <td class="tdd2">{{ player.sdp }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Wyjścia do piłki: </td>
+                  <td class="tdd2">{{ player.wdp }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Wykopy: </td>
+                  <td class="tdd2">{{ player.wyko }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Wyrzuty: </td>
+                  <td class="tdd2">{{ player.wyrz }}</td>
+                </tr>
+                <tr>
+                  <td class="tdd1">Zasięg wyskoku: </td>
+                  <td class="tdd2">{{ player.zawys }}</td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+
+    <div class="viewdiv">
+        <fieldset class="viewfieldset" id="fs7">
+            <legend><h3>Cechy by Hajto</h3></legend>
+            <ul> {% for element in player.hajto_list %}
+                <li>{{ element }}</li>
+                {% endfor %}
+            </ul>
+
+        </fieldset>
+    </div>
+
+    <div class="viewdiv">
+        <fieldset class="viewfieldset" id="fs8">
+            <legend><h3>Cechy B-klasowe</h3></legend>
+            <ul> {% for element in player.bclas_list %}
+                <li>{{ element }}</li>
+                {% endfor %}
+            </ul>
+
+        </fieldset>
+    </div>
+
+    <div class="viewdiv">
+        <fieldset class="viewfieldset" id="fs9">
+            <legend><h3>Dodatkowy opis</h3></legend>
+            <h4>{{ player.description }}</h4>
+
+        </fieldset>
+    </div>
+</div>
+
+<br>
+
+<a href="/update-player/{{ player.pk }}">Edytuj piłkarza</a>
+{% endblock %}

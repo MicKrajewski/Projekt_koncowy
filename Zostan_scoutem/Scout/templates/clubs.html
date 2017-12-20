@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Lista klubów:</h1>
+<ul>
+    {% for element in clubs %}
+            <li><a href="/club/{{ element.id }}">{{ element.name }}</a></li>
+
+            {% endfor %}
+</ul>
+
+<a href="/add-club">Dodaj klub</a>
+
+
+{% endblock %}

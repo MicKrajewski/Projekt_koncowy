@@ -1,0 +1,7 @@
+<h4>wypełnij formularz</h4>
+
+<form method="POST">
+{{ form.as_p }}
+{% csrf_token %}
+<button type="submit">Wyślij</button>
+</form>
