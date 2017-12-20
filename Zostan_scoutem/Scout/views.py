@@ -7,14 +7,25 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from .models import Club, Player, HAJ, BK
-from .forms import ClubsForm
+from .forms import PlayerSearchForm, ClubSearchForm
 
 
 class ClubsView(View):
 
     def get(self, request):
+        form = ClubSearchForm()
         clubs = Club.objects.all().order_by("name")
-        return render(request, "clubs.html", {"clubs": clubs})
+        return render(request, "clubs.html", {"clubs": clubs, "form": form})
+
+    def post(self, request):
+        form = ClubSearchForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            result = Club.objects.filter(name__icontains=name)
+        # else:
+        #     return render(request, "clubs.html", {"form": ClubSearchForm(), "msg": "Nie ma takiego klubu w bazie"})
+        return render(request, "clubs.html", {"form": form, "result": result})
+
 
 
 class ClubIdView(View):
@@ -40,8 +51,18 @@ class ClubUpdateView(UpdateView):
 class PlayersView(View):
 
     def get(self, request):
+        form = PlayerSearchForm()
         players = Player.objects.all().order_by("last_name")
-        return render(request, "players.html", {"players": players})
+        return render(request, "players.html", {"players": players, "form": form})
+
+    def post(self, request):
+        form = PlayerSearchForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            result = Player.objects.filter(last_name__icontains=name)
+        # else:
+        #     return render(request, "players.html", {"form": PlayerSearchForm(), "msg": "Nie ma takiego piłkarza w bazie"})
+        return render(request, "players.html", {"form": form, "result": result})
 
 
 class PlayerIdView(View):

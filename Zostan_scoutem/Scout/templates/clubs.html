@@ -1,13 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
+<h2>Szukaj klubów</h2>
+<form method="POST">
+{{ form.as_p }}
+{% csrf_token %}
+<button type="submit">Szukaj</button>
+</form>
 
-<h1>Lista klubów:</h1>
+<h2>Lista klubów:</h2>
 <ul>
     {% for element in clubs %}
             <li><a href="/club/{{ element.id }}">{{ element.name }}</a></li>
 
             {% endfor %}
+</ul>
+<ul>
+{% for name in result %}
+    <li><a href="/club/{{ name.id }}">{{ name.name }}</a></li>
+    {% endfor %}
 </ul>
 
 <a href="/add-club">Dodaj klub</a>
