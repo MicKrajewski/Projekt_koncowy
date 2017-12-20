@@ -15,6 +15,17 @@
         {% block content %}
         {% endblock %}
 
+    <footer>
+            <p>
+                 {% if user.is_authenticated %}
+                    zalogowano jako: {{ user }}
+                    <a href="{% url 'logout' %}">wyloguj</a>
+                {% else %}
+                    <a href="{% url 'login' %}">zaloguj</a>
+                {% endif %}
+            </p>
+        </footer>
+
 
     </body>
 </html>

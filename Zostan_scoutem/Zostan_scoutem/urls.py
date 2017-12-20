@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from Scout.views import (ClubsView, ClubIdView, AddClubsView, ClubUpdateView, PlayersView, PlayerIdView, AddPlayerView,
-                         PlayerUpdateView)
+                         PlayerUpdateView, LoginView, LogoutView, ListUsersView, SignupView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,5 +28,8 @@ urlpatterns = [
     path('player/<int:id>/', PlayerIdView.as_view(), name="player_id"),
     path('add-player/', AddPlayerView.as_view(), name="add_player"),
     path('update-player/<int:pk>/', PlayerUpdateView.as_view(), name="update_player"),
-
+    path('login/', LoginView.as_view(), name="login"),
+    path('logout/', LogoutView.as_view(), name="logout"),
+    path('list-users/', ListUsersView.as_view(), name="list-users"),
+    path('signup/', SignupView.as_view(), name="signup"),
 ]

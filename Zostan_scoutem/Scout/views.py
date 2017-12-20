@@ -7,7 +7,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from .models import Club, Player, HAJ, BK
-from .forms import PlayerSearchForm, ClubSearchForm
+from django.contrib.auth.forms import UserCreationForm
+from .forms import PlayerSearchForm, ClubSearchForm, LoginForm, SignupForm
 
 
 class ClubsView(View):
@@ -82,3 +83,75 @@ class PlayerUpdateView(UpdateView):
     fields = '__all__'
     success_url = '/players'
     template_name_suffix = "_form"
+
+
+class ListUsersView(View):
+    def get(self, request):
+        users = User.objects.all()
+        return render(request, "list-users.html", {"users": users})
+
+
+class LoginView(View):
+    def get(self, request):
+        form = LoginForm()
+        return render(request, "form_show.html", {"form": form})
+
+    def post(self, request):
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password"]
+            auth = authenticate(username=username, password=password)
+            if auth:
+                login(request, auth)
+                return HttpResponse("Zalogowany jako: {}".format(auth.username))
+            else:
+                return HttpResponse("Błędny login lub hasło.")
+        return render(request, "form_show.html", {"form": form})
+
+
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        return HttpResponseRedirect('/login')
+
+
+# class SignupView2(View):
+#     def get(self, request):
+#         form = SignupForm()
+#         return render(request, "signup.html", {"form": form})
+#
+#     def post(self, request):
+#         form = SignupForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             username = form.cleaned_data["username"]
+#             password = form.cleaned_data["password"]
+#             email = form.cleaned_data["email"]
+#             auth = authenticate(username=username, password=password, email=email)
+#             if auth:
+#                 login(request, auth)
+#                 return HttpResponse("Zarejestrowano")
+#             else:
+#                 return HttpResponse("Błędne dane.")
+#         return render(request, "signup.html", {"form": form})
+
+
+class SignupView(View):
+
+    def get(self, request):
+        form = UserCreationForm()
+        return render(request, "signup.html", {"form": form})
+
+    def post(self, request):
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return HttpResponseRedirect('clubs')
+        else:
+            form = UserCreationForm()
+        return render(request, 'signup.html', {'form': form})
