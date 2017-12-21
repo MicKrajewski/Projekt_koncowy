@@ -10,22 +10,22 @@
 
 <h2>Lista piłkarzy:</h2>
 <!--{{ msg }}-->
-
-<table class="tabplayvie">
-    <tr class="lpn">
+<div style="overflow-x:auto;">
+<table id="customers">
+    <tr>
         <th scope="col">IMIĘ I NAZWISKO</th>
         <th scope="col">NARODOWOŚĆ</th>
         <th scope="col">KLUB</th>
         <th scope="col">POZYCJA</th>
         <th scope="col">WIEK</th>
-        <th scope="col">WZROST</th>
         <th scope="col">WAGA</th>
+        <th scope="col">WZROST</th>
         <th scope="col">WARTOŚĆ</th>
     </tr>
     {% for element in players %}
 
     <tr>
-      <th scope="row"><a href="/player/{{ element.id }}">{{ element.name }}</a></th>
+      <td><a href="/player/{{ element.id }}">{{ element.name }}</a></td>
       <td>{{ element.nationality }}</td>
       <td><a href="/club/{{ element.clubs.id }}">{{ element.clubs.name }}</a></td>
       <td>{{ element.position }}</td>
@@ -39,7 +39,7 @@
     {% endfor %}
 
 </table>
-
+</div>
 
 <!--<ul>-->
     <!--{% for element in players %}-->

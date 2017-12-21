@@ -76,6 +76,9 @@ class Club(models.Model):
                                          verbose_name="Pojemność stadionu")
     # player = models.ManyToManyField(Player, verbose_name="Lista piłkarzy", default=0)
 
+    def __str__(self):
+        return self.name
+
 
 class Player(models.Model):
     clubs = models.ForeignKey(Club, on_delete=models.CASCADE, verbose_name="Klub")

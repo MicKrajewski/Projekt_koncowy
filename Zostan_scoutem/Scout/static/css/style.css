@@ -3,7 +3,7 @@ body {
 	color: black;
 	font-family: 'Lato', sans-serif;
 	font-size: 15px;
-    width: 1000px;
+    width: 1200px;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -92,6 +92,39 @@ body {
   text-align: center;
 }
 
-.lpn {
-    border: 1px solid black
+/*.tabplayvie {*/
+    /*border: 1px solid black;*/
+    /*table-layout: initial;*/
+    /*border-collapse: collapse*/
+/*}*/
+
+
+/*.tabplayvie2 {*/
+    /*border: 1px double black;*/
+    /*table-layout: initial;*/
+    /*border-collapse: collapse*/
+/*}*/
+
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
 }
+
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
