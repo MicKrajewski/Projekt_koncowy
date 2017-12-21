@@ -1,17 +1,41 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1> {{ club.name }}</h1>
-    <ul>
-        <li>Miasto: {{ club.city }}</li>
-        <li>Liga: {{ club.league }}</li>
-        <li>Rok założenia: {{ club.year }}</li>
-        <li>Reputacja: {{ club.get_reputation_display }}</li>
-        <li>Stan finansów: {{ club.get_money_display }}</li>
-        <li>Nazwa stadionu: {{ club.arena_name }}</li>
-        <li>Pojemność stadionu: {{ club.arena_capacity }}</li>
-
-    </ul>
+<div style="overflow-x:auto;">
+<table id="customers">
+    <tr>
+        <th colspan="2">{{ club.name }}</th>
+    </tr>
+    <tr>
+        <td class="tdd1">Miasto</td>
+        <td class="tdd2">{{ club.city }}</td>
+    </tr>
+    <tr>
+        <td class="tdd1">Liga</td>
+        <td class="tdd2">{{ club.league }}</td>
+    </tr>
+    <tr>
+        <td class="tdd1">Rok założenia</td>
+        <td class="tdd2">{{ club.year }}</td>
+    </tr>
+    <tr>
+        <td class="tdd1">Reputacja</td>
+        <td class="tdd2">{{ club.get_reputation_display }}</td>
+    </tr>
+    <tr>
+        <td class="tdd1">Stan finansów</td>
+        <td class="tdd2">{{ club.get_money_display }}</td>
+    </tr>
+    <tr>
+        <td class="tdd1">Nazwa stadionu</td>
+        <td class="tdd2">{{ club.arena_name }}</td>
+    </tr>
+    <tr>
+        <td class="tdd1">Pojemność stadionu</td>
+        <td class="tdd2">{{ club.arena_capacity }}</td>
+    </tr>
+</table>
+</div>
 
 <h2>Lista piłkarzy:</h2>
 <div style="overflow-x:auto;">
