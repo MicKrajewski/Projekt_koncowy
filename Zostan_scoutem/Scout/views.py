@@ -8,16 +8,16 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from .models import Club, Player, HAJ, BK, Shortlist
 from .forms import PlayerSearchForm, ClubSearchForm, LoginForm, SignupForm, AddToShortForm, ShortlistForm
-
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 class HomeView(View):
     def get(self, request):
         return render(request, "start.html")
 
 
-class ClubsView(PermissionRequiredMixin, View):
+class ClubsView(View):
 
-    permission_required = "Scout.add_club"
 
     def get(self, request):
         form = ClubSearchForm()
@@ -25,16 +25,14 @@ class ClubsView(PermissionRequiredMixin, View):
         return render(request, "clubs.html", {"clubs": clubs, "form": form})
 
     def post(self, request):
-        if request.user.has_perm("add_club"):
-            form = ClubSearchForm(request.POST)
-            if form.is_valid():
-                name = form.cleaned_data['name']
-                result = Club.objects.filter(name__icontains=name)
+
+        form = ClubSearchForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            result = Club.objects.filter(name__icontains=name)
             # else:
             #     return render(request, "clubs.html", {"form": ClubSearchForm(), "msg": "Nie ma takiego klubu w bazie"})
-            return render(request, "clubs.html", {"form": form, "result": result})
-        else:
-            return HttpResponse("Nie da się!")
+        return render(request, "clubs.html", {"form": form, "result": result})
 
 
 class SearchClubView(View):
@@ -61,12 +59,15 @@ class ClubIdView(View):
         return render(request, "clubid.html", {"club": club, "players":players})
 
 
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class AddClubsView(CreateView):
     model = Club
     fields = '__all__'
     success_url = '/clubs'
 
 
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class ClubUpdateView(UpdateView):
     model = Club
     fields = '__all__'
@@ -111,13 +112,14 @@ class PlayerIdView(View):
             pass
 
 
-
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class AddPlayerView(CreateView):
     model = Player
     fields = '__all__'
     success_url = '/players'
 
 
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class PlayerUpdateView(UpdateView):
     model = Player
     fields = '__all__'
@@ -125,6 +127,7 @@ class PlayerUpdateView(UpdateView):
     template_name_suffix = "_form"
 
 
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class ListUsersView(View):
     def get(self, request):
         users = User.objects.all()
@@ -175,12 +178,14 @@ class SignupView(View):
         return render(request, 'signup.html', {'form': form})
 
 
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class AddShortlistView(CreateView):
     model = Shortlist
     fields = ['shortlist_name', 'loged_user']
     success_url = '/shortlist'
 
 
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class ShortlistView(View):
 
     def get(self, request):
@@ -189,6 +194,8 @@ class ShortlistView(View):
         # players = Player.objects.filter(clubs=club)
         return render(request, "shortlist.html", {"shorty": shorty})
 
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class AddToShort(View):
 
     def get(self, request, id, short_id):

@@ -19,16 +19,18 @@
 
 </div>
 
+
         <div class="topnav">
             <a href="{% url 'signup' %}">ZAREJESTRUJ SIĘ</a>
             <a href="{% url 'players' %}">LISTA PIŁKARZY</a>
             <a href="{% url 'clubs' %}">LISTA KLUBÓW</a>
             {% if user.is_authenticated %}
                     <!--zalogowano jako: {{ user }}-->
-            <a href="{% url 'logout' %}">WYLOGUJ</a>
+            <a href="{% url 'logout' %}">WYLOGUJ: {{ user }}</a>
                 {% else %}
             <a href="{% url 'login' %}">ZALOGUJ</a>
                 {% endif %}
+            <a href="{% url 'shortlist' %}">{{ short }}</a>
         </div>
 
     <div class="backnav">
