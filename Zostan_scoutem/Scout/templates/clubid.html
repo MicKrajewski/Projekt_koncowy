@@ -14,16 +14,39 @@
     </ul>
 
 <h2>Lista piłkarzy:</h2>
-<ul>
+<div style="overflow-x:auto;">
+<table id="customers">
+    <tr>
+        <th scope="col">IMIĘ I NAZWISKO</th>
+        <th scope="col">NARODOWOŚĆ</th>
+        <th scope="col">KLUB</th>
+        <th scope="col">POZYCJA</th>
+        <th scope="col">WIEK</th>
+        <th scope="col">WAGA</th>
+        <th scope="col">WZROST</th>
+        <th scope="col">WARTOŚĆ</th>
+    </tr>
     {% for element in players %}
-    <li><a href="/player/{{ element.id }}">{{ element.name }}</a></li>
+
+    <tr>
+      <td><a href="/player/{{ element.id }}">{{ element.name }}</a></td>
+      <td>{{ element.nationality }}</td>
+      <td><a href="/club/{{ element.clubs.id }}">{{ element.clubs.name }}</a></td>
+      <td>{{ element.position }}</td>
+      <td>{{ element.age }}</td>
+      <td>{{ element.weight }}</td>
+      <td>{{ element.height }}</td>
+      <td>{{ element.paid }}</td>
+    </tr>
+
+
     {% endfor %}
-</ul>
 
-
-
-<a href="/update-club/{{ club.pk }}">Edytuj klub</a>
+</table>
+</div>
 <br>
-<a href="/add-player">Dodaj piłkarza</a>
+<hr>
+
+<h3><a href="/add-player">Dodaj piłkarza</a></h3>
 {% endblock %}
 

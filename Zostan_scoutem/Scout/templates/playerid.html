@@ -2,7 +2,7 @@
 
 {% block content %}
 <h1> {{ player.name }}</h1>
-
+<a href="/update-player/{{ player.pk }}">Edytuj piłkarza</a>
 <div>
     <div class="viewdiv">
         <fieldset class="viewfieldset" id="fs1">
@@ -303,7 +303,4 @@
     </div>
 </div>
 
-<br>
-
-<a href="/update-player/{{ player.pk }}">Edytuj piłkarza</a>
 {% endblock %}
