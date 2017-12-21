@@ -17,6 +17,11 @@ body {
     font-size: 20px;
 }
 
+.playhead {
+    text-align: center;
+    font-size: 40px;
+}
+
 /* Style the top navigation bar */
 .topnav {
     overflow: hidden;
@@ -82,7 +87,7 @@ body {
   width: 325px;
   height: 600px;
   float: left;
-  background-color: #ACC4CE;
+  background-color: #g2g2g2;
 }
 
 .tdd1 {

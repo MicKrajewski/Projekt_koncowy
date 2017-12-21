@@ -1,14 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="header"> {{ player.name }}</h1>
-<a href="/update-player/{{ player.pk }}">Edytuj piłkarza</a>
+<h1 class="playhead"> {{ player.name }}</h1>
+
+<br>
 <form method="POST">
 {{ form.as_p }}
 {% csrf_token %}
 <button type="submit">Dodaj do shortlisty</button>
 </form>
-
+<br>
+<div>
+<a href="/update-player/{{ player.pk }}">Edytuj piłkarza</a>
+</div>
+<br>
 <div class="viewfieldset" style="overflow-x:auto;">
 
 <table id="customers">
