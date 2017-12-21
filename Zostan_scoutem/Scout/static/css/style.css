@@ -92,19 +92,6 @@ body {
   text-align: center;
 }
 
-/*.tabplayvie {*/
-    /*border: 1px solid black;*/
-    /*table-layout: initial;*/
-    /*border-collapse: collapse*/
-/*}*/
-
-
-/*.tabplayvie2 {*/
-    /*border: 1px double black;*/
-    /*table-layout: initial;*/
-    /*border-collapse: collapse*/
-/*}*/
-
 #customers {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
