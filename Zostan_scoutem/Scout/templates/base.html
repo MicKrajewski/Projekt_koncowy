@@ -12,23 +12,24 @@
     <body>
 
     <div class="header">
-  <h1>Zostań skautem</h1>
+        <a class="active" href="/"></a>
+  <h1><a class="active" href="/">Zostań skautem</a></h1>
 </div>
 
         <div class="topnav">
             <a href="{% url 'signup' %}">ZAREJESTRUJ SIĘ</a>
-            <a href="{% url 'players' %}">LISTA PIŁKARZY</a><
+            <a href="{% url 'players' %}">LISTA PIŁKARZY</a>
             <a href="{% url 'clubs' %}">LISTA KLUBÓW</a>
             {% if user.is_authenticated %}
                     <!--zalogowano jako: {{ user }}-->
-            </li><a href="{% url 'logout' %}">WYLOGUJ</a>
+            <a href="{% url 'logout' %}">WYLOGUJ</a>
                 {% else %}
             <a href="{% url 'login' %}">ZALOGUJ</a>
                 {% endif %}
         </div>
 
     <div class="backnav">
-        <li><a class="active" href="">Home</a></li>
+        <li><a class="active" href="/">Home</a></li>
         <li><a href="/add-player">Dodaj piłkarza</a></li>
         <li><a href="/add-club">Dodaj klub</a></li>
         <li><a href="/search-player">Szukaj piłkarza</a></li>

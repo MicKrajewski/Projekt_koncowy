@@ -1,83 +1,12 @@
-<!doctype html>
-{% load static %}
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Zostań skautem</title>
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% extends "base.html" %}
 
-    </head>
-    <style>
-* {
-    box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-}
-
-/* Style the header */
-.header {
-    background-color: #f1f1f1;
-    padding: 20px;
-    text-align: center;
-}
-
-/* Style the top navigation bar */
-.topnav {
-    overflow: hidden;
-    background-color: #333;
-}
-
-/* Style the topnav links */
-.topnav a {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-/* Change color on hover */
-.topnav a:hover {
-    background-color: #ddd;
-    color: black;
-}
-</style>
+{% block content %}
+<h1 align="center">Moje inspiracje:</h1>
+<br>
+<a href="http://www.footballmanager.com/" target="blank">
+    <img src="/static/images/artwork.jpg" width="993" height="570"></a>
+<br>
+<iframe width="993" height="570" src="https://www.youtube.com/embed/1XZAXOFBC1Q" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 
 
-    <body>
-
-    <div class="header">
-  <h1>Zostań skautem</h1>
-</div>
-
-        <div class="topnav">
-            <a href="{% url 'signup' %}">ZAREJESTRUJ SIĘ</a>
-            <a href="{% url 'players' %}">LISTA PIŁKARZY</a><
-            <a href="{% url 'clubs' %}">LISTA KLUBÓW</a>
-            {% if user.is_authenticated %}
-                    <!--zalogowano jako: {{ user }}-->
-            </li><a href="{% url 'logout' %}">WYLOGUJ</a>
-                {% else %}
-            <a href="{% url 'login' %}">ZALOGUJ</a>
-                {% endif %}
-        </div>
-
-
-        {% block content %}
-        {% endblock %}
-
-    <footer>
-            <p>
-                 {% if user.is_authenticated %}
-                    zalogowano jako: {{ user }}
-
-                {% endif %}
-            </p>
-        </footer>
-
-
-    </body>
-</html>
+{% endblock %}

@@ -17,10 +17,11 @@ from django.contrib import admin
 from django.urls import path
 from Scout.views import (ClubsView, ClubIdView, AddClubsView, ClubUpdateView, PlayersView, PlayerIdView, AddPlayerView,
                          PlayerUpdateView, LoginView, LogoutView, ListUsersView, SignupView, SearchPlayerView,
-                         SearchClubView, AddShortlistView, ShortlistView)
+                         SearchClubView, AddShortlistView, ShortlistView, HomeView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', HomeView.as_view(), name="home"),
     path('clubs/', ClubsView.as_view(), name="clubs"),
     path('club/<int:id>/', ClubIdView.as_view(), name="club_id"),
     path('add-club/', AddClubsView.as_view(), name="add_club"),

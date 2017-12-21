@@ -10,6 +10,11 @@ from .models import Club, Player, HAJ, BK, Shortlist
 from .forms import PlayerSearchForm, ClubSearchForm, LoginForm, SignupForm, ShortlistForm
 
 
+class HomeView(View):
+    def get(self, request):
+        return render(request, "start.html")
+
+
 class ClubsView(PermissionRequiredMixin, View):
 
     permission_required = "Scout.add_club"
