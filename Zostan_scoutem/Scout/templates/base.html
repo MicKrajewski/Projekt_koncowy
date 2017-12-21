@@ -7,44 +7,6 @@
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
     </head>
-    <style>
-* {
-    box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-}
-
-/* Style the header */
-.header {
-    background-color: #f1f1f1;
-    padding: 20px;
-    text-align: center;
-}
-
-/* Style the top navigation bar */
-.topnav {
-    overflow: hidden;
-    background-color: #333;
-}
-
-/* Style the topnav links */
-.topnav a {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-/* Change color on hover */
-.topnav a:hover {
-    background-color: #ddd;
-    color: black;
-}
-</style>
 
 
     <body>
@@ -65,18 +27,27 @@ body {
                 {% endif %}
         </div>
 
+    <div class="backnav">
+        <li><a class="active" href="">Home</a></li>
+        <li><a href="/add-player">Dodaj piłkarza</a></li>
+        <li><a href="/add-club">Dodaj klub</a></li>
+        <li><a href="/search-player">Szukaj piłkarza</a></li>
+        <li><a href="/search-club">Szukaj klubu</a></li>
+    </div>
 
+    <div style="margin-left:15%;padding:1px 16px;height:100%;">
         {% block content %}
         {% endblock %}
+    </div>
 
-    <footer>
-            <p>
-                 {% if user.is_authenticated %}
-                    zalogowano jako: {{ user }}
+    <!--<footer>-->
+            <!--<p>-->
+                 <!--{% if user.is_authenticated %}-->
+                    <!--zalogowano jako: {{ user }}-->
 
-                {% endif %}
-            </p>
-        </footer>
+                <!--{% endif %}-->
+            <!--</p>-->
+        <!--</footer>-->
 
 
     </body>

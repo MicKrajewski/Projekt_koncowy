@@ -1,14 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Szukaj piłkarzy</h2>
-<form method="POST">
-{{ form.as_p }}
-{% csrf_token %}
-<button type="submit">Szukaj</button>
-</form>
 
-<h2>Lista piłkarzy:</h2>
+
+
 <!--{{ msg }}-->
 <div style="overflow-x:auto;">
 <table id="customers">
@@ -47,13 +42,7 @@
 
             <!--{% endfor %}-->
 <!--</ul>-->
-<ul>
-{% for name in result %}
-    <li><a href="/player/{{ name.id }}">{{ name }}</a></li>
-    {% endfor %}
-</ul>
 
-<a href="/add-player">Dodaj piłkarza</a>
 
 
 {% endblock %}

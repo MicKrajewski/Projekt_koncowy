@@ -1,27 +1,48 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Szukaj klubów</h2>
-<form method="POST">
-{{ form.as_p }}
-{% csrf_token %}
-<button type="submit">Szukaj</button>
-</form>
 
-<h2>Lista klubów:</h2>
-<ul>
+<div style="overflow-x:auto;">
+<table id="customers">
+    <tr>
+        <th scope="col">NAZWA</th>
+        <th scope="col">MIASTO</th>
+        <th scope="col">LIGA</th>
+        <th scope="col">ROK ZAŁOŻENIA</th>
+        <th scope="col">REPUTACJA</th>
+        <th scope="col">STAN FINANSÓW</th>
+        <th scope="col">NAZWA STADIONU</th>
+        <th scope="col">POJEMNOŚĆ</th>
+
+    </tr>
     {% for element in clubs %}
-            <li><a href="/club/{{ element.id }}">{{ element.name }}</a></li>
 
-            {% endfor %}
-</ul>
-<ul>
-{% for name in result %}
-    <li><a href="/club/{{ name.id }}">{{ name.name }}</a></li>
+    <tr>
+      <td><a href="/club/{{ element.id }}">{{ element.name }}</a></td>
+      <td>{{ element.city }}</td>
+      <td>{{ element.league }}</td>
+      <td>{{ element.year }}</td>
+      <td>{{ element.get_reputation_display }}</td>
+      <td>{{ element.get_money_display }}</td>
+      <td>{{ element.arena_name }}</td>
+      <td>{{ element.arena_capacity }}</td>
+    </tr>
+
+
     {% endfor %}
-</ul>
 
-<a href="/add-club">Dodaj klub</a>
+</table>
+
+
+
+<!--<ul>-->
+    <!--{% for element in clubs %}-->
+            <!--<li><a href="/club/{{ element.id }}">{{ element.name }}</a></li>-->
+
+            <!--{% endfor %}-->
+<!--</ul>-->
+
+
 
 
 {% endblock %}

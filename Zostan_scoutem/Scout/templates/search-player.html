@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Szukaj piłkarzy</h2>
+<form method="POST">
+{{ form.as_p }}
+{% csrf_token %}
+<button type="submit">Szukaj</button>
+</form>
+
+
+
+    <table id="customers">
+        <tr>
+            <th scope="col">IMIĘ I NAZWISKO</th>
+            <th scope="col">NARODOWOŚĆ</th>
+            <th scope="col">KLUB</th>
+            <th scope="col">POZYCJA</th>
+            <th scope="col">WIEK</th>
+            <th scope="col">WAGA</th>
+            <th scope="col">WZROST</th>
+            <th scope="col">WARTOŚĆ</th>
+        </tr>
+        <tr>{% for element in result %}
+          <td><a href="/player/{{ element.id }}">{{ element.name }}</a></td>
+          <td>{{ element.nationality }}</td>
+          <td><a href="/club/{{ element.clubs.id }}">{{ element.clubs.name }}</a></td>
+          <td>{{ element.position }}</td>
+          <td>{{ element.age }}</td>
+          <td>{{ element.weight }}</td>
+          <td>{{ element.height }}</td>
+          <td>{{ element.paid }}</td>
+        </tr>{% endfor %}
+    </table>
+
+    <!--<li><a href="/player/{{ name.id }}">{{ name }} {{ name.age }}</a></li>-->
+
+
+
+{% endblock %}

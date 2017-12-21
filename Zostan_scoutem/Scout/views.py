@@ -32,6 +32,23 @@ class ClubsView(PermissionRequiredMixin, View):
             return HttpResponse("Nie da się!")
 
 
+class SearchClubView(View):
+
+    def get(self, request):
+        form = ClubSearchForm()
+        clubs = Club.objects.all().order_by("name")
+        return render(request, "search-club.html", {"clubs":clubs, "form": form})
+
+    def post(self, request):
+        form = ClubSearchForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            result = Club.objects.filter(name__icontains=name)
+        # else:
+        #     return render(request, "players.html", {"form": PlayerSearchForm(), "msg": "Nie ma takiego piłkarza w bazie"})
+        return render(request, "search-club.html", {"form": form, "result": result})
+
+
 class ClubIdView(View):
     def get(self, request, id):
         club = get_object_or_404(Club, pk=id)
@@ -59,6 +76,14 @@ class PlayersView(View):
         players = Player.objects.all().order_by("last_name")
         return render(request, "players.html", {"players": players, "form": form})
 
+
+class SearchPlayerView(View):
+
+    def get(self, request):
+        form = PlayerSearchForm()
+        players = Player.objects.all().order_by("last_name")
+        return render(request, "search-player.html", {"players": players, "form": form})
+
     def post(self, request):
         form = PlayerSearchForm(request.POST)
         if form.is_valid():
@@ -66,7 +91,8 @@ class PlayersView(View):
             result = Player.objects.filter(last_name__icontains=name)
         # else:
         #     return render(request, "players.html", {"form": PlayerSearchForm(), "msg": "Nie ma takiego piłkarza w bazie"})
-        return render(request, "players.html", {"form": form, "result": result})
+        return render(request, "search-player.html", {"form": form, "result": result})
+
 
 
 class PlayerIdView(View):
