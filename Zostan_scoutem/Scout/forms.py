@@ -1,5 +1,5 @@
 from django import forms
-from .models import Club
+from .models import Club, Shortlist
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group
 
@@ -36,5 +36,11 @@ class SignupForm(UserCreationForm):
         model = User
         fields = ['username', 'password1', 'password2', 'group']
         widgets = {'password': forms.PasswordInput}
+
+
+class ShortlistForm(forms.ModelForm):
+    class Meta:
+        model = Shortlist
+        fields = '__all__'
 
 

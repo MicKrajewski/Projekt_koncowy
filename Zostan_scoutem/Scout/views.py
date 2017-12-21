@@ -6,8 +6,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormVi
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from .models import Club, Player, HAJ, BK
-from .forms import PlayerSearchForm, ClubSearchForm, LoginForm, SignupForm
+from .models import Club, Player, HAJ, BK, Shortlist
+from .forms import PlayerSearchForm, ClubSearchForm, LoginForm, SignupForm, ShortlistForm
 
 
 class ClubsView(PermissionRequiredMixin, View):
@@ -162,4 +162,18 @@ class SignupView(View):
             login(request, user)
             return HttpResponseRedirect(reverse('list-users'))
         return render(request, 'signup.html', {'form': form})
+
+
+class AddShortlistView(CreateView):
+    model = Shortlist
+    fields = '__all__'
+    success_url = '/shortlist'
+
+
+class ShortlistView(View):
+
+    def get(self, request):
+        # form = ShortlistForm()
+        shorty = Shortlist.objects.all()
+        return render(request, "shortlist.html", {"shorty": shorty})
 
