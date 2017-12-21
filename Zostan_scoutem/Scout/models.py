@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from multiselectfield import MultiSelectField
+from django.contrib.auth.models import User
 
 REPU = (
     (1, "*"),
@@ -220,4 +221,5 @@ class Player(models.Model):
 
 class Shortlist(models.Model):
     shortlist_name = models.CharField(max_length=64, verbose_name="Nazwa shortlisty")
-    players = models.ManyToManyField(Player, verbose_name="Lista piłkarzy", default=0)
+    players = models.ManyToManyField(Player, verbose_name="Lista piłkarzy", default=0, null=True)
+    loged_user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Użytkownik")

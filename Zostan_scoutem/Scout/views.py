@@ -138,9 +138,9 @@ class LoginView(View):
             auth = authenticate(username=username, password=password)
             if auth:
                 login(request, auth)
-                return HttpResponseRedirect('/clubs')
+                return HttpResponseRedirect('/')
             else:
-                return HttpResponse("Błędny login lub hasło.")
+                return HttpResponseRedirect('/login')
         return render(request, "form_show.html", {"form": form})
 
 
@@ -165,13 +165,13 @@ class SignupView(View):
             group = form.cleaned_data["group"]
             user = authenticate(username=username, password=raw_password, group=group)
             login(request, user)
-            return HttpResponseRedirect(reverse('list-users'))
+            return HttpResponseRedirect(reverse('/'))
         return render(request, 'signup.html', {'form': form})
 
 
 class AddShortlistView(CreateView):
     model = Shortlist
-    fields = '__all__'
+    fields = ['shortlist_name', 'loged_user']
     success_url = '/shortlist'
 
 
@@ -180,5 +180,6 @@ class ShortlistView(View):
     def get(self, request):
         # form = ShortlistForm()
         shorty = Shortlist.objects.all()
+        # players = Player.objects.filter(clubs=club)
         return render(request, "shortlist.html", {"shorty": shorty})
 
