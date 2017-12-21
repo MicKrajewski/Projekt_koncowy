@@ -1,21 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1> {{ player.name }}</h1>
+<h1 class="header"> {{ player.name }}</h1>
 <a href="/update-player/{{ player.pk }}">Edytuj piłkarza</a>
 <form method="POST">
 {{ form.as_p }}
 {% csrf_token %}
 <button type="submit">Dodaj do shortlisty</button>
 </form>
-<div>
-    <div class="viewdiv">
-        <fieldset class="viewfieldset" id="fs1">
-            <legend><h3>Informacje ogólne</h3></legend>
-            <table>
+
+<div class="viewfieldset" style="overflow-x:auto;">
+
+<table id="customers">
+
                 <tr>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
+                    <th colspan="2"; class="atry">INFORMACJE OGÓLNE</th>
+
                 </tr>
                 <tr>
                     <td class="tdd1">Imię: </td>
@@ -64,19 +64,20 @@
                     <td class="tdd1">Klub: </td>
                     <td class="tdd2"><a href="/club/{{ player.clubs.id }}">{{ player.clubs.name }}</a></td>
                 </tr>
-            </table>
-        </fieldset>
-    </div>
 
-    <div class="viewdiv">
-        <fieldset class="viewfieldset" id="fs2">
-            <legend><h3>Atrybuty techniczne</h3></legend>
-            <table>
+
+</table>
+</div>
+
+
+<div class="viewfieldset" style="overflow-x:auto;">
+
+<table id="customers">
+
                 <tr>
-                  <th scope="col"></th>
-                  <th scope="col"></th>
+                    <th colspan="2"; class="atry">ATRYBUTY TECHNICZNE</th>
                 </tr>
-                <tr>
+<tr>
                   <td class="tdd1">Dośrodkowania: </td>
                   <td class="tdd2">{{ player.dos }}</td>
                 </tr>
@@ -121,19 +122,18 @@
                   <td class="tdd1">Wykańczanie akcji: </td>
                   <td class="tdd2">{{ player.wyk }}</td>
                 </tr>
-              </table>
-        </fieldset>
-    </div >
 
-    <div class="viewdiv">
-        <fieldset class="viewfieldset" id="fs3">
-            <legend><h3>Atrybuty psychiczne</h3></legend>
-            <table>
+</table>
+</div>
+
+<div class="viewfieldset" style="overflow-x:auto;">
+
+<table id="customers">
+
                 <tr>
-                  <th scope="col"></th>
-                  <th scope="col"></th>
+                    <th colspan="2"; class="atry">ATRYBUTY PSYCHICZNE</th>
                 </tr>
-                <tr>
+    <tr>
                   <td class="tdd1">Agresja: </td>
                   <td class="tdd2">{{ player.agre }}</td>
                 </tr>
@@ -173,19 +173,19 @@
                   <td class="tdd1">Współpraca: </td>
                   <td class="tdd2">{{ player.wsp }}</td>
                 </tr>
-            </table>
-        </fieldset>
-    </div>
 
-    <div class="viewdiv">
-        <fieldset class="viewfieldset" id="fs5">
-            <legend><h3>Atrybuty fizyczne</h3></legend>
-            <table>
+
+</table>
+</div>
+
+<div class="viewfieldset" style="overflow-x:auto;">
+
+<table id="customers">
+
                 <tr>
-                  <th scope="col"></th>
-                  <th scope="col"></th>
+                    <th colspan="2"; class="atry">ATRYBUTY FIZYCZNE</th>
                 </tr>
-                <tr>
+<tr>
                   <td class="tdd1">Przyspieszenie: </td>
                   <td class="tdd2">{{ player.przys }}</td>
                 </tr>
@@ -217,19 +217,18 @@
                   <td class="tdd1">Zwinność: </td>
                   <td class="tdd2">{{ player.zwinn }}</td>
                 </tr>
-            </table>
-        </fieldset>
-    </div>
 
-    <div class="viewdiv">
-        <fieldset class="viewfieldset" id="fs6">
-            <legend><h3>Atrybuty bramkarskie</h3></legend>
-            <table>
+</table>
+</div>
+
+<div class="viewfieldset" style="overflow-x:auto;">
+
+<table id="customers">
+
                 <tr>
-                  <th scope="col"></th>
-                  <th scope="col"></th>
+                    <th colspan="2"; class="atry">ATRYBUTY BRAMKARSKIE</th>
                 </tr>
-                <tr>
+<tr>
                   <td class="tdd1">Chwytanie: </td>
                   <td class="tdd2">{{ player.chwy }}</td>
                 </tr>
@@ -273,39 +272,67 @@
                   <td class="tdd1">Zasięg wyskoku: </td>
                   <td class="tdd2">{{ player.zawys }}</td>
                 </tr>
-            </table>
-        </fieldset>
-    </div>
 
-    <div class="viewdiv">
-        <fieldset class="viewfieldset" id="fs7">
-            <legend><h3>Cechy by Hajto</h3></legend>
+</table>
+</div>
+
+<div class="viewfieldset" style="overflow-x:auto;">
+
+<table id="customers">
+
+                <tr>
+                    <th scope="col" ; class="atry">CECHY BY HAJTO</th>
+                </tr>
+    <tr>
+        <td>
             <ul> {% for element in player.hajto_list %}
                 <li>{{ element }}</li>
                 {% endfor %}
             </ul>
+        </td>
+    </tr>
 
-        </fieldset>
-    </div>
 
-    <div class="viewdiv">
-        <fieldset class="viewfieldset" id="fs8">
-            <legend><h3>Cechy B-klasowe</h3></legend>
+
+</table>
+</div>
+
+<div class="viewfieldset" style="overflow-x:auto;">
+<table id="customers">
+
+                <tr>
+                    <th scope="col" ; class="atry">CECHY B-KLASOWE</th>
+                </tr>
+    <tr>
+        <td>
             <ul> {% for element in player.bclas_list %}
                 <li>{{ element }}</li>
                 {% endfor %}
             </ul>
+        </td>
+    </tr>
 
-        </fieldset>
-    </div>
 
-    <div class="viewdiv">
-        <fieldset class="viewfieldset" id="fs9">
-            <legend><h3>Dodatkowy opis</h3></legend>
-            <h4>{{ player.description }}</h4>
 
-        </fieldset>
-    </div>
+</table>
 </div>
+
+<div class="viewfieldset" style="overflow-x:auto;">
+<table id="customers">
+
+                <tr>
+                    <th scope="col"; class="atry">DODATKOWY OPIS</th>
+                </tr>
+    <tr>
+        <td>
+            {{ player.description }}
+        </td>
+    </tr>
+
+
+
+</table>
+</div>
+
 
 {% endblock %}

@@ -44,3 +44,5 @@ class ShortlistForm(forms.ModelForm):
         fields = '__all__'
 
 
+class AddToShortForm(forms.Form):
+    pass

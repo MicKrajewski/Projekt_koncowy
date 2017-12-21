@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from .models import Club, Player, HAJ, BK, Shortlist
-from .forms import PlayerSearchForm, ClubSearchForm, LoginForm, SignupForm, ShortlistForm
+from .forms import PlayerSearchForm, ClubSearchForm, LoginForm, SignupForm, AddToShortForm, ShortlistForm
 
 
 class HomeView(View):
@@ -103,7 +103,13 @@ class SearchPlayerView(View):
 class PlayerIdView(View):
     def get(self, request, id):
         player = get_object_or_404(Player, pk=id)
-        return render(request, "playerid.html", {"player": player, "HAJ":HAJ, "BK":BK})
+        return render(request, "playerid1.html", {"player": player, "HAJ":HAJ, "BK":BK})
+
+    def post(self, request, id):
+        form = AddToShortForm(request.POST)
+        if form.is_valid():
+            pass
+
 
 
 class AddPlayerView(CreateView):
@@ -182,4 +188,11 @@ class ShortlistView(View):
         shorty = Shortlist.objects.all()
         # players = Player.objects.filter(clubs=club)
         return render(request, "shortlist.html", {"shorty": shorty})
+
+class AddToShort(View):
+
+    def get(self, request, id, short_id):
+        player = get_object_or_404(Player, pk=id)
+        shortlist = get_object_or_404(Shortlist, pk=short_id)
+        return render(request, "shortlist.html", {"shortlist": shortlist, "player":player})
 

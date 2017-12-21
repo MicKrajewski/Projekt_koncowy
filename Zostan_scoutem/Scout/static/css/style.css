@@ -79,45 +79,10 @@ body {
 
 
 .viewfieldset {
-  width: 190px;
+  width: 325px;
   height: 600px;
   float: left;
-}
-
-#fs1 {
-  background-color: #c4dce8;
-}
-
-#fs2 {
-  background-color: #d5edf9;
-}
-
-#fs3 {
-  background-color: #94a8be;
-}
-
-#fs4 {
-  background-color: #a6bdd6;
-}
-
-#fs5 {
-  background-color: #b9d3ee;
-}
-
-#fs6 {
-  background-color: #c0d7ef;
-}
-
-#fs7 {
-  background-color: #c7dbf1;
-}
-
-#fs8 {
-  background-color: #cee0f3;
-}
-
-#fs9 {
-  background-color: #d5e4f4;
+  background-color: #ACC4CE;
 }
 
 .tdd1 {
@@ -176,4 +141,8 @@ body {
 
 iframe {
     align: top;
+}
+
+.atry {
+    text-align: center;
 }
