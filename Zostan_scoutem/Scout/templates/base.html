@@ -7,22 +7,64 @@
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
     </head>
+    <style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+/* Style the header */
+.header {
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Style the top navigation bar */
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+}
+
+/* Style the topnav links */
+.topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+</style>
 
 
     <body>
-        <h1 id="starth">Zostań skautem</h1>
 
-        <ul id="stra">
-            <li class="strp"><a href="{% url 'signup' %}">ZAREJESTRUJ SIĘ</a></li>
-            <li class="strp"><a href="{% url 'players' %}">LISTA PIŁKARZY</a></li>
-            <li class="strp"><a href="{% url 'clubs' %}">LISTA KLUBÓW</a></li>
+    <div class="header">
+  <h1>Zostań skautem</h1>
+</div>
+
+        <div class="topnav">
+            <a href="{% url 'signup' %}">ZAREJESTRUJ SIĘ</a>
+            <a href="{% url 'players' %}">LISTA PIŁKARZY</a><
+            <a href="{% url 'clubs' %}">LISTA KLUBÓW</a>
             {% if user.is_authenticated %}
                     <!--zalogowano jako: {{ user }}-->
-            <li class="strp"></li><a href="{% url 'logout' %}">WYLOGUJ</a></ul>
+            </li><a href="{% url 'logout' %}">WYLOGUJ</a>
                 {% else %}
-            <li class="strp"><a href="{% url 'login' %}">ZALOGUJ</a></li>
+            <a href="{% url 'login' %}">ZALOGUJ</a>
                 {% endif %}
-        </ul>
+        </div>
+
 
         {% block content %}
         {% endblock %}
