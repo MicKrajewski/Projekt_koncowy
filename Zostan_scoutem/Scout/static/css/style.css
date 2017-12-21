@@ -64,3 +64,30 @@ body {
 .tdd1 {
   color: red;
 }
+
+#stra {
+    background-color: #ACC4CE;
+    color: white;
+    font-size: 20px;
+    text-shadow: 0 5px 5px #878787;
+    font-family: Arial, sans-serif;
+    line-height: 1.5em;
+    text-align: center;
+}
+
+.strp {
+    color: #116493;
+    display: inline-block;
+    margin: 20px;
+
+}
+
+#starth {
+    background-color: #ACC4CE;
+  color: white;
+  font-size: 40px;
+  text-shadow: 0 5px 5px #878787;
+  font-family: Arial, sans-serif;
+  line-height: 1.5em;
+  text-align: center;
+}

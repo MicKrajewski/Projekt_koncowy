@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from .models import Club, Player, HAJ, BK
-# from django.contrib.auth.forms import UserCreationForm
 from .forms import PlayerSearchForm, ClubSearchForm, LoginForm, SignupForm
 
 
@@ -30,7 +29,7 @@ class ClubsView(PermissionRequiredMixin, View):
             #     return render(request, "clubs.html", {"form": ClubSearchForm(), "msg": "Nie ma takiego klubu w bazie"})
             return render(request, "clubs.html", {"form": form, "result": result})
         else:
-            return HttpResponseRedirect(reverse('login'))
+            return HttpResponse("Nie da się!")
 
 
 class ClubIdView(View):
@@ -108,7 +107,7 @@ class LoginView(View):
             auth = authenticate(username=username, password=password)
             if auth:
                 login(request, auth)
-                return HttpResponse("Zalogowany jako: {}".format(auth.username))
+                return HttpResponseRedirect('/clubs')
             else:
                 return HttpResponse("Błędny login lub hasło.")
         return render(request, "form_show.html", {"form": form})

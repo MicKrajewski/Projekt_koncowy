@@ -10,7 +10,19 @@
 
 
     <body>
-        <h1>Zostań skautem</h1>
+        <h1 id="starth">Zostań skautem</h1>
+
+        <ul id="stra">
+            <li class="strp"><a href="{% url 'signup' %}">ZAREJESTRUJ SIĘ</a></li>
+            <li class="strp"><a href="{% url 'players' %}">LISTA PIŁKARZY</a></li>
+            <li class="strp"><a href="{% url 'clubs' %}">LISTA KLUBÓW</a></li>
+            {% if user.is_authenticated %}
+                    <!--zalogowano jako: {{ user }}-->
+            <li class="strp"></li><a href="{% url 'logout' %}">WYLOGUJ</a></ul>
+                {% else %}
+            <li class="strp"><a href="{% url 'login' %}">ZALOGUJ</a></li>
+                {% endif %}
+        </ul>
 
         {% block content %}
         {% endblock %}
@@ -19,9 +31,7 @@
             <p>
                  {% if user.is_authenticated %}
                     zalogowano jako: {{ user }}
-                    <a href="{% url 'logout' %}">wyloguj</a>
-                {% else %}
-                    <a href="{% url 'login' %}">zaloguj</a>
+
                 {% endif %}
             </p>
         </footer>

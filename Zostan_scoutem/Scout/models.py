@@ -65,13 +65,13 @@ BK = (
 
 
 class Club(models.Model):
-    name = models.CharField(max_length=32, verbose_name="Nazwa")
-    city = models.CharField(max_length=32, verbose_name="Miasto")
-    league = models.CharField(max_length=32, verbose_name="Liga")
+    name = models.CharField(max_length=64, verbose_name="Nazwa")
+    city = models.CharField(max_length=64, verbose_name="Miasto")
+    league = models.CharField(max_length=64, verbose_name="Liga")
     year = models.IntegerField(validators=[MinValueValidator(1800), MaxValueValidator(2018)], verbose_name="Rok założenia")
     reputation = models.IntegerField(choices=REPU, verbose_name="Reputacja")
     money = models.IntegerField(choices=MON, verbose_name="Stan finansów")
-    arena_name = models.CharField(max_length=32, verbose_name="Nazwa stadionu")
+    arena_name = models.CharField(max_length=64, verbose_name="Nazwa stadionu")
     arena_capacity = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100000)],
                                          verbose_name="Pojemność stadionu")
     # player = models.ManyToManyField(Player, verbose_name="Lista piłkarzy", default=0)
@@ -213,3 +213,8 @@ class Player(models.Model):
             if element[0] == id:
                 return element[1]
         return None
+
+
+class Shortlist(models.Model):
+    shortlist_name = models.CharField(max_length=64, verbose_name="Nazwa shortlisty")
+    players = models.ManyToManyField(Player, verbose_name="Lista piłkarzy", default=0)
