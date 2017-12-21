@@ -10,12 +10,43 @@
 
 <h2>Lista piłkarzy:</h2>
 <!--{{ msg }}-->
-<ul>
-    {% for element in players %}
-            <li><a href="/player/{{ element.id }}">{{ element.name }}</a></li>
 
-            {% endfor %}
-</ul>
+<table class="tabplayvie">
+    <tr class="lpn">
+        <th scope="col">IMIĘ I NAZWISKO</th>
+        <th scope="col">NARODOWOŚĆ</th>
+        <th scope="col">KLUB</th>
+        <th scope="col">POZYCJA</th>
+        <th scope="col">WIEK</th>
+        <th scope="col">WZROST</th>
+        <th scope="col">WAGA</th>
+        <th scope="col">WARTOŚĆ</th>
+    </tr>
+    {% for element in players %}
+
+    <tr>
+      <th scope="row"><a href="/player/{{ element.id }}">{{ element.name }}</a></th>
+      <td>{{ element.nationality }}</td>
+      <td><a href="/club/{{ element.clubs.id }}">{{ element.clubs.name }}</a></td>
+      <td>{{ element.position }}</td>
+      <td>{{ element.age }}</td>
+      <td>{{ element.weight }}</td>
+      <td>{{ element.height }}</td>
+      <td>{{ element.paid }}</td>
+    </tr>
+
+
+    {% endfor %}
+
+</table>
+
+
+<!--<ul>-->
+    <!--{% for element in players %}-->
+            <!--<li><a href="/player/{{ element.id }}">{{ element.name }}</a></li>-->
+
+            <!--{% endfor %}-->
+<!--</ul>-->
 <ul>
 {% for name in result %}
     <li><a href="/player/{{ name.id }}">{{ name }}</a></li>
