@@ -202,6 +202,11 @@ class DeleteShortlistView(DeleteView):
 
 @method_decorator(login_required(login_url='/login/'), name='dispatch')
 class DeletePlayerFromShortlistView(View):
-    pass
 
+    def get(self, request, id_shortlist, id_player):
+        player = get_object_or_404(Player, pk=id_player)
+        shortlist = get_object_or_404(Shortlist, pk=id_shortlist)
+        shortlist.players.remove(player)
+        shortlist.save()
+        return HttpResponseRedirect(reverse('shortlist_id', args=[id_shortlist]))
 
