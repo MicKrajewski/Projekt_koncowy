@@ -11,28 +11,19 @@ from .forms import PlayerSearchForm, ClubSearchForm, LoginForm, SignupForm, AddT
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
+
 class HomeView(View):
+
     def get(self, request):
         return render(request, "start.html")
 
 
 class ClubsView(View):
 
-
     def get(self, request):
         form = ClubSearchForm()
         clubs = Club.objects.all().order_by("name")
         return render(request, "clubs.html", {"clubs": clubs, "form": form})
-
-    def post(self, request):
-
-        form = ClubSearchForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            result = Club.objects.filter(name__icontains=name)
-            # else:
-            #     return render(request, "clubs.html", {"form": ClubSearchForm(), "msg": "Nie ma takiego klubu w bazie"})
-        return render(request, "clubs.html", {"form": form, "result": result})
 
 
 class SearchClubView(View):
@@ -53,6 +44,7 @@ class SearchClubView(View):
 
 
 class ClubIdView(View):
+
     def get(self, request, id):
         club = get_object_or_404(Club, pk=id)
         players = Player.objects.filter(clubs=club)
@@ -103,13 +95,21 @@ class SearchPlayerView(View):
 
 class PlayerIdView(View):
     def get(self, request, id):
+        form = AddToShortForm()
         player = get_object_or_404(Player, pk=id)
-        return render(request, "playerid1.html", {"player": player, "HAJ":HAJ, "BK":BK})
+        return render(request, "playerid1.html", {"player": player, "HAJ":HAJ, "BK":BK, "form":form})
 
     def post(self, request, id):
         form = AddToShortForm(request.POST)
         if form.is_valid():
-            pass
+            player = get_object_or_404(Player, pk=id)
+            shortlist_name = form.cleaned_data['shortlist_name']
+            for shortlist in shortlist_name:
+                shortlist.players.add(player)
+                shortlist.save()
+            print(shortlist_name)
+            # shortlist_name = get_object_or_404(Shortlist, )
+            return render(request, "playerid1.html", {"form": form, "result": result})
 
 
 @method_decorator(login_required(login_url='/login/'), name='dispatch')
@@ -203,3 +203,16 @@ class AddToShort(View):
         shortlist = get_object_or_404(Shortlist, pk=short_id)
         return render(request, "shortlist.html", {"shortlist": shortlist, "player":player})
 
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class ShortlistIdView(View):
+
+    def get(self, request, id):
+        shorty = get_object_or_404(Shortlist, pk=id)
+        return render(request, "shortlistid.html", {"shorty": shorty})
+
+    # class ClubIdView(View):
+    #     def get(self, request, id):
+    #         club = get_object_or_404(Club, pk=id)
+    #         players = Player.objects.filter(clubs=club)
+    #         return render(request, "clubid.html", {"club": club, "players": players})

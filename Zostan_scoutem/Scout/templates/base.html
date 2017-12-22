@@ -30,7 +30,9 @@
                 {% else %}
             <a href="{% url 'login' %}">ZALOGUJ</a>
                 {% endif %}
-            <a href="{% url 'shortlist' %}">{{ short }}</a>
+            {% for element in short %}
+            <a href="/shortlist/{{ element.id }}">SHORTLISTA: {{ element.shortlist_name }}</a>
+            {% endfor %}
         </div>
 
     <div class="backnav">
@@ -47,16 +49,6 @@
         {% block content %}
         {% endblock %}
     </div>
-
-    <!--<footer>-->
-            <!--<p>-->
-                 <!--{% if user.is_authenticated %}-->
-                    <!--zalogowano jako: {{ user }}-->
-
-                <!--{% endif %}-->
-            <!--</p>-->
-        <!--</footer>-->
-
 
     </body>
 </html>

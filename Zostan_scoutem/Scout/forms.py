@@ -45,4 +45,9 @@ class ShortlistForm(forms.ModelForm):
 
 
 class AddToShortForm(forms.Form):
-    pass
+    shortlist_name = forms.ModelMultipleChoiceField(label="Wybierz shortlistę", queryset=Shortlist.objects.all(), widget=forms.CheckboxSelectMultiple)
+
+    # class Meta:
+    #     model = Shortlist
+    #     fields = ['shortlist_name']
+    #     # widgets = {'shortlist_name': forms.CheckboxInput}

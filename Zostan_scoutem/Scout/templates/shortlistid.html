@@ -2,15 +2,10 @@
 
 {% block content %}
 
-{% for element in short %}
-
 
 <ul>
- <li>SHORTLISTA: {{ element.shortlist_name }}</li>
+ <li>SHORTLISTA: {{ shorty.shortlist_name }}</li>
 </ul>
-
-{% endfor %}
-
 
 <table id="customers">
         <tr>
@@ -23,8 +18,8 @@
             <th scope="col">WZROST</th>
             <th scope="col">WARTOŚĆ</th>
         </tr>
-        <tr>
-        {% for element in short.players.all %}
+    <tr>
+        {% for element in shorty.players.all %}
           <td><a href="/player/{{ element.id }}">{{ element.name }}</a></td>
           <td>{{ element.nationality }}</td>
           <td><a href="/club/{{ element.clubs.id }}">{{ element.clubs.name }}</a></td>
@@ -35,6 +30,9 @@
           <td>{{ element.paid }}</td>
         </tr>
  {% endfor %}
+
+
+
     </table>
 
 

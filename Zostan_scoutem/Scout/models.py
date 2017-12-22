@@ -223,3 +223,6 @@ class Shortlist(models.Model):
     shortlist_name = models.CharField(max_length=64, verbose_name="Nazwa shortlisty")
     players = models.ManyToManyField(Player, verbose_name="Lista piłkarzy", default=0, null=True)
     loged_user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Użytkownik")
+
+    def __str__(self):
+        return self.shortlist_name
