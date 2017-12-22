@@ -182,7 +182,7 @@ class SignupView(View):
 class AddShortlistView(CreateView):
     model = Shortlist
     fields = ['shortlist_name', 'loged_user']
-    success_url = '/shortlist'
+    success_url = '/'
 
 
 @method_decorator(login_required(login_url='/login/'), name='dispatch')
@@ -191,3 +191,10 @@ class ShortlistIdView(View):
     def get(self, request, id):
         shorty = get_object_or_404(Shortlist, pk=id)
         return render(request, "shortlistid.html", {"shorty": shorty})
+
+
+# @method_decorator(login_required(login_url='/login/'), name='dispatch')
+class DeleteShortlistView(DeleteView):
+    model = Shortlist
+    success_url = '/'
+    template_name_suffix = "delete_form"

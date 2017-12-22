@@ -2,10 +2,10 @@
 
 {% block content %}
 
-
-<ul>
- <li>SHORTLISTA: {{ shorty.shortlist_name }}</li>
-</ul>
+<hi class="playhead">SHORTLISTA: {{ shorty.shortlist_name }}</hi>
+<br>
+<div><a href="/delete-shortlist/{{ shorty.id }}">Usuń shortlistę</a></div>
+<br>
 
 <table id="customers">
         <tr>
