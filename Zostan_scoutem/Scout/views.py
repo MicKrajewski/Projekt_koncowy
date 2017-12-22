@@ -172,9 +172,11 @@ class SignupView(View):
             username = form.cleaned_data["username"]
             raw_password = form.cleaned_data["password1"]
             group = form.cleaned_data["group"]
-            user = authenticate(username=username, password=raw_password, group=group)
+            user = authenticate(username=username, password=raw_password)
+            user.groups.add(group)
+            user.save()
             login(request, user)
-            return HttpResponseRedirect(reverse('/'))
+            return HttpResponseRedirect(reverse('home'))
         return render(request, 'signup.html', {'form': form})
 
 
