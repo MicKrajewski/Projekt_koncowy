@@ -193,8 +193,15 @@ class ShortlistIdView(View):
         return render(request, "shortlistid.html", {"shorty": shorty})
 
 
-# @method_decorator(login_required(login_url='/login/'), name='dispatch')
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class DeleteShortlistView(DeleteView):
     model = Shortlist
     success_url = '/'
     template_name_suffix = "delete_form"
+
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
+class DeletePlayerFromShortlistView(View):
+    pass
+
+

@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<hi class="playhead">SHORTLISTA: {{ shorty.shortlist_name }}</hi>
+<h1 class="playhead">Shortlista: {{ shorty.shortlist_name }}</h1>
 <br>
 <div><a href="/delete-shortlist/{{ shorty.id }}">Usuń shortlistę</a></div>
 <br>
@@ -13,10 +13,12 @@
             <th scope="col">NARODOWOŚĆ</th>
             <th scope="col">KLUB</th>
             <th scope="col">POZYCJA</th>
+            <th scope="col">POTENCJAŁ</th>
             <th scope="col">WIEK</th>
             <th scope="col">WAGA</th>
             <th scope="col">WZROST</th>
             <th scope="col">WARTOŚĆ</th>
+            <th scope="col">USUWANIE</th>
         </tr>
     <tr>
         {% for element in shorty.players.all %}
@@ -24,10 +26,12 @@
           <td>{{ element.nationality }}</td>
           <td><a href="/club/{{ element.clubs.id }}">{{ element.clubs.name }}</a></td>
           <td>{{ element.position }}</td>
+          <td>{{ element.get_pa_display }}</td>
           <td>{{ element.age }}</td>
           <td>{{ element.weight }}</td>
           <td>{{ element.height }}</td>
           <td>{{ element.paid }}</td>
+          <td><a href="/delete-shortplay/{{ shorty.id }}/{{ element.id }}">usuń {{ element.pk }}</a></td>
         </tr>
  {% endfor %}
 
