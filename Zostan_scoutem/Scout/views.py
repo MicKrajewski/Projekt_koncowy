@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from .models import Club, Player, HAJ, BK, Shortlist
-from .forms import PlayerSearchForm, ClubSearchForm, LoginForm, SignupForm, AddToShortForm, ShortlistForm
+from .forms import PlayerSearchForm, ClubSearchForm, LoginForm, SignupForm, AddToShortForm
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
@@ -94,11 +94,13 @@ class SearchPlayerView(View):
 
 
 class PlayerIdView(View):
+
     def get(self, request, id):
         form = AddToShortForm()
         player = get_object_or_404(Player, pk=id)
         return render(request, "playerid1.html", {"player": player, "HAJ":HAJ, "BK":BK, "form":form})
 
+    @method_decorator(login_required(login_url='/login/'), name='dispatch')
     def post(self, request, id):
         form = AddToShortForm(request.POST)
         if form.is_valid():
@@ -107,9 +109,7 @@ class PlayerIdView(View):
             for shortlist in shortlist_name:
                 shortlist.players.add(player)
                 shortlist.save()
-            print(shortlist_name)
-            # shortlist_name = get_object_or_404(Shortlist, )
-            return render(request, "playerid1.html", {"form": form, "result": result})
+            return render(request, "playerid1.html", {"player": player, "HAJ":HAJ, "BK":BK, "form":form})
 
 
 @method_decorator(login_required(login_url='/login/'), name='dispatch')
@@ -186,33 +186,8 @@ class AddShortlistView(CreateView):
 
 
 @method_decorator(login_required(login_url='/login/'), name='dispatch')
-class ShortlistView(View):
-
-    def get(self, request):
-        # form = ShortlistForm()
-        shorty = Shortlist.objects.all()
-        # players = Player.objects.filter(clubs=club)
-        return render(request, "shortlist.html", {"shorty": shorty})
-
-
-@method_decorator(login_required(login_url='/login/'), name='dispatch')
-class AddToShort(View):
-
-    def get(self, request, id, short_id):
-        player = get_object_or_404(Player, pk=id)
-        shortlist = get_object_or_404(Shortlist, pk=short_id)
-        return render(request, "shortlist.html", {"shortlist": shortlist, "player":player})
-
-
-@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class ShortlistIdView(View):
 
     def get(self, request, id):
         shorty = get_object_or_404(Shortlist, pk=id)
         return render(request, "shortlistid.html", {"shorty": shorty})
-
-    # class ClubIdView(View):
-    #     def get(self, request, id):
-    #         club = get_object_or_404(Club, pk=id)
-    #         players = Player.objects.filter(clubs=club)
-    #         return render(request, "clubid.html", {"club": club, "players": players})

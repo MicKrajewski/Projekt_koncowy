@@ -4,12 +4,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group
 
 
-# class UserForm(ModelForm):
-#     class Meta:
-#         model = User
-#         fields = ('username', 'email', 'password')
-
-
 class ClubsForm(forms.ModelForm):
     class Meta:
         model = Club
@@ -38,16 +32,5 @@ class SignupForm(UserCreationForm):
         widgets = {'password': forms.PasswordInput}
 
 
-class ShortlistForm(forms.ModelForm):
-    class Meta:
-        model = Shortlist
-        fields = '__all__'
-
-
 class AddToShortForm(forms.Form):
     shortlist_name = forms.ModelMultipleChoiceField(label="Wybierz shortlistę", queryset=Shortlist.objects.all(), widget=forms.CheckboxSelectMultiple)
-
-    # class Meta:
-    #     model = Shortlist
-    #     fields = ['shortlist_name']
-    #     # widgets = {'shortlist_name': forms.CheckboxInput}

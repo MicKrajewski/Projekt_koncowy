@@ -24,25 +24,25 @@
             <a href="{% url 'signup' %}">ZAREJESTRUJ SIĘ</a>
             <a href="{% url 'players' %}">LISTA PIŁKARZY</a>
             <a href="{% url 'clubs' %}">LISTA KLUBÓW</a>
+            <a href="/add-player">DODAJ PIŁKARZA</a>
+            <a href="/add-club">DODAJ KLUB</a>
+
             {% if user.is_authenticated %}
-                    <!--zalogowano jako: {{ user }}-->
             <a href="{% url 'logout' %}">WYLOGUJ: {{ user }}</a>
                 {% else %}
             <a href="{% url 'login' %}">ZALOGUJ</a>
                 {% endif %}
-            {% for element in short %}
-            <a href="/shortlist/{{ element.id }}">SHORTLISTA: {{ element.shortlist_name }}</a>
-            {% endfor %}
+
         </div>
 
     <div class="backnav">
         <li><a class="active" href="/">Home</a></li>
-        <li><a href="/add-player">Dodaj piłkarza</a></li>
-        <li><a href="/add-club">Dodaj klub</a></li>
         <li><a href="/search-player">Szukaj piłkarza</a></li>
         <li><a href="/search-club">Szukaj klubu</a></li>
-        <li><a href="/shortlist">Shortlisty</a></li>
         <li><a href="/add-shortlist">Dodaj shortlistę</a></li>
+        {% for element in short %}
+        <li><a href="/shortlist/{{ element.id }}">Shortlista: {{ element.shortlist_name }}</a></li>
+            {% endfor %}
     </div>
 
     <div style="margin-left:15%;padding:1px 16px;height:100%;background-color: #e4e5ff;">
